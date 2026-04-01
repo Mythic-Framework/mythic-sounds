@@ -5,6 +5,7 @@ function RetrieveComponents()
 	Logger = exports["mythic-base"]:FetchComponent("Logger")
 	Sounds = exports["mythic-base"]:FetchComponent("Sounds")
 	Middleware = exports["mythic-base"]:FetchComponent("Middleware")
+	Version = exports["mythic-base"]:FetchComponent("Version")
 end
 
 AddEventHandler("Core:Shared:Ready", function()
@@ -14,6 +15,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		"Logger",
 		"Sounds",
 		"Middleware",
+		"Version",
 	}, function(error)
 		if #error > 0 then
 			return
@@ -28,6 +30,8 @@ AddEventHandler("Core:Shared:Ready", function()
 		Middleware:Add("playerDropped", function(source)
 			TriggerClientEvent("Sounds:Client:Stop:All", -1, source)
 		end, 2)
+
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)
 
